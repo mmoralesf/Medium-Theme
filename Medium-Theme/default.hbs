@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {{!-- Document Settings --}}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    {{!-- Page Meta --}}
+    <title>{{meta_title}}</title>
+    {{!-- Mobile Meta --}}
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {{!-- Brand icon --}}
+    <link rel="shortcut icon" href="{{asset "favicon.ico"}}">
+    {{!-- Styles'n'Scripts --}}
+    <link rel="stylesheet" type="text/css" href="{{asset "css/bootstrap.min.css"}}" />
+    
+    
+    <style> @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700|Source+Serif+Pro:400,700');</style>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" integrity="sha384-TEMocfGvRuD1rIAacqrknm5BQZ7W7uWitoih+jMNFXQIbNl16bO8OZmylH/Vi/Ei" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js" integrity="sha384-jmxIlussZWB7qCuB+PgKG1uLjjxbVVIayPJwi6cG6Zb4YKq0JIw+OMnkkEC7kYCq" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js" integrity="sha384-IiI65aU9ZYub2MY9zhtKd1H2ps7xxf+eb2YFG9lX6uRqpXCvBTOidPRCXCrQ++Uc" crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{asset "css/mediumish.css"}}" />
+    {{!-- Ghost outputs important style and meta data with this tag --}}
+    <script src="{{asset "js/jquery.min.js"}}"></script>
+    {{ghost_head}}
+</head>
+
+<body class="{{body_class}}">
+
+    {{!-- The blog navigation links --}}
+    {{navigation}}
+
+    <div class="container">
+        {{!-- All the main content gets inserted here, index.hbs, post.hbs, etc --}}
+        {{>katex}}
+        {{{body}}}
+        {{!-- Footer at the very bottom --}}
+        <div class="footer">
+      		<p class="pull-left">
+      			 <a href="{{@blog.url}}">{{@blog.title}}</a> &copy; {{date format="YYYY"}}
+      		</p>
+      		<p class="pull-right">
+      			 Licencia MIT 3.0; proyecto por <a target="_blank" href="https://humanizando.me">Mariano Morales R.</a>
+      		</p>
+      		<div class="clearfix">
+      		</div>
+      	</div>
+    </div>
+
+    {{!-- Ghost outputs important scripts and data with this tag --}}
+    {{ghost_foot}}
+   
+    <script>
+      var cb = function() {
+        var l = document.createElement('link'); l.rel = 'stylesheet';
+        l.href = '{{asset "css/defer.css"}}';
+        var h = document.getElementsByTagName('head')[0];
+        h.parentNode.insertBefore(l, h);
+      };
+      var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+          webkitRequestAnimationFrame || msRequestAnimationFrame;
+      if (raf) raf(cb);
+      else window.addEventListener('load', cb);
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="{{asset "js/bootstrap.min.js"}}"></script>
+    <script src="{{asset "js/ie10-viewport-bug-workaround.js"}}"></script>
+    <script src="{{asset "js/masonry.pkgd.min.js"}}"></script>
+    <script src="{{asset "js/jquery.ghostHunter.min.js"}}"></script>
+    <script src="{{asset "js/mediumish.js"}}"></script>
+
+</body>
+</html>

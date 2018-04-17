@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{! Document Settings }}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    {{! Page Meta }}
+    <title>{{meta_title}}{{#is "post, page"}} — {{@blog.title}}{{/is}}</title>
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    {{! Styles'n'Scripts }}
+    <link rel="stylesheet" type="text/css" href="{{asset "css/main.css"}}" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/brands.css" integrity="sha384-IiIL1/ODJBRTrDTFk/pW8j0DUI5/z9m1KYsTm/RjZTNV8RHLGZXkUDwgRRbbQ+Jh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
+
+<!-- For speed, I’ve added the response from this link straight into defer.css-->
+<!--<link rel="stylesheet" href="//brick.a.ssl.fastly.net/Source+Serif+Pro:400,700/Source+Sans+Pro:400,900,400i,900i/Alegreya:400i,700i">-->
+
+    {{! Ghost outputs important style and meta data with this tag }}
+    {{ghost_head}}
+</head>
+<body class="{{body_class}}" id="body">
+
+    {{! Everything else gets inserted here }}
+    {{{body}}}
+
+    <footer class="site-footer">
+      <a class="subscribe icon-feed" href="{{@blog.url}}/rss/">
+       <span class="tooltip">Subscríbete</span>
+      </a>
+<!--  Uncomment if you want a copy of your navigation in the footer. It’s pretty cool, and gives your visitors something to do when they finish an article other than commenting, sharing, or closing the tab.    -->
+      <nav>
+        {{navigation}}
+      </nav>
+      <div>
+        <span class="print-data copyright-notice">
+          &copy; {{date format="YYYY"}}
+          <a href="{{@blog.url}}/">{{@blog.title}}</a>
+          &nbsp;&bull;&nbsp;
+        </span>
+
+        <span>
+
+          <a href="http://github.com/mmoralesf">mnml</a>
+        tema
+          <a href="http://theweb.market">MMR</a>
+        </span>
+
+
+
+    </footer>
+
+    <!--
+    This generates a handsome modal menu and hamburger icon. If you want to use it, edit     menu.hbs and add your links (line ~146), then remove the ! from this helper to           activate it.
+    -->
+    {{#if @blog.navigation}}
+      {{>menu}}
+    {{/if}}
+
+
+    <!-- Ghost outputs important scripts and data with this tag -->
+    {{ghost_foot}}
+
+    <!--
+    This loads katex.hbs in; if a page has anything with the class .math, katex.hbs           loads Khan Academy’s Tex math typesetting library and runs it on the content.
+
+    If you don’t want to use KaTeX, comment this out.
+    -->
+    {{>katex}}
+
+    <script>
+      var cb = function() {
+        var l = document.createElement('link'); l.rel = 'stylesheet';
+        l.href = '{{asset "css/defer.css"}}';
+        var h = document.getElementsByTagName('head')[0];
+        h.parentNode.insertBefore(l, h);
+      };
+      var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+          webkitRequestAnimationFrame || msRequestAnimationFrame;
+      if (raf) raf(cb);
+      else window.addEventListener('load', cb);
+    </script>
+
+    {{! The main JavaScript file for Mnml (Look, ma! No jQuery!)}}
+    <script async src="{{asset "js/index.js"}}"></script>
+    <script defer src="{{asset "js/prism.min.js"}}"></script>
+
+</body>
+</html>

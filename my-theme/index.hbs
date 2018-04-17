@@ -1,0 +1,52 @@
+{{!< default}}
+{{!-- The tag above means - insert everything in this file into the {body} of the default.hbs template --}}
+
+{{!-- The big featured header --}}
+
+
+<div class="mainheading {{#is "home"}} homecover {{/is}}" {{#is "home"}} {{#if @blog.cover_image}} style="background-image:url({{@blog.cover_image}});" {{/if}} {{/is}}>
+<h1 style="font-family:Merriweather; text-align:center" class="main-title"> <span>{{@blog.title}}</span> </h1>
+<p style="font-family:Merriweather; text-align:center"></p><span>{{@blog.description}}</span></div>
+
+
+{{!-- The main content area on the homepage --}}
+
+
+{{!-- Featured Section --}}
+{{#is "home"}}
+<section class="featured-posts">
+	<div class="section-title">
+		<h2><br><span class="title">Destacadas</span></h2>
+	</div>
+	<div class="masonrygrid row listfeaturedtag">
+		{{#get "posts" filter="featured:true" limit="4" as |featured|}}
+
+		{{#foreach featured}}
+				 {{!-- The tag below includes the markup for each post - partials/post-card-featured.hbs --}}
+				 {{> "post-card-featured"}}
+		 {{/foreach}}
+
+		 {{/get}}
+	</div>
+</section>
+{{/is}}
+
+{{!-- All Stories Section --}}
+<section class="recent-posts">
+	<div class="section-title">
+		<h2><span class="title">Publicaciones</span> {{pagination}} <div class="clearfix"></div></h2>
+	</div>
+	<div class="masonrygrid row listrecent">
+		{{#get "posts" limit="12"}}
+		{{#foreach posts}}
+				 {{!-- The tag below includes the markup for each post - partials/post-card.hbs --}}
+				 {{> "post-card"}}
+		 {{/foreach}}
+		 {{/get}}
+	<div class="clearfix"></div>
+	</div>
+	<div class="bottompagination">
+		<div class="pointerup"><i class="fa fa-caret-up"></i></div>
+		{{pagination}}
+	</div>
+</section>
